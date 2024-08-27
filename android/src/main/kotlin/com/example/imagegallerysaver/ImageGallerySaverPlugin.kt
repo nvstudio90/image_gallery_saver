@@ -260,13 +260,11 @@ class ImageGallerySaverPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 outputStream = context.contentResolver?.openOutputStream(fileUri)
                 if (outputStream != null) {
                     fileInputStream = FileInputStream(originalFile)
-
-                    val buffer = ByteArray(10240)
+                    val buffer = ByteArray(1024)
                     var count = 0
                     while (fileInputStream.read(buffer).also { count = it } > 0) {
                         outputStream.write(buffer, 0, count)
                     }
-
                     outputStream.flush()
                     success = true
                 }
