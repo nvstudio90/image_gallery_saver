@@ -79,7 +79,7 @@ class ImageGallerySaverPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                 val outUri = data?.data
                 saveImageToGallery(bitmap, quantity, outUri)
             } else {
-                result?.success(SaveResultModel(false, null, "saveImageToGallery fail").toHashMap())
+                result?.success(SaveResultModel(false, null, "canceled").toHashMap())
             }
             return true
         }

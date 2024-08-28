@@ -76,6 +76,11 @@ public class SwiftImageGallerySaverPlugin: NSObject, FlutterPlugin {
     }
     
     func saveImage(_ image: UIImage, isReturnImagePath: Bool) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        if (status == PHAuthorizationStatus.denied || status == PHAuthorizationStatus.restricted) {
+            self.saveResult(isSuccess: false, error: "permission_denied")
+            return
+        }
         if !isReturnImagePath {
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(didFinishSavingImage(image:error:contextInfo:)), nil)
             return
